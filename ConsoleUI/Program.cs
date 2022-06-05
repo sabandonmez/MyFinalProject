@@ -16,10 +16,23 @@ namespace ConsoleUI
         {
 
 
+
+
             ProductManager productManager = new ProductManager(new EfProductDal());
-            foreach (var product in productManager.GetProductDetail())
+
+            var result = productManager.GetProductDetail();
+            if (result.Succes == true)
             {
-                Console.WriteLine(product.ProductName +" / "+product.CategoryName);
+                foreach (var product in result.Data)
+                {
+                    Console.WriteLine(product.ProductName + " / " + product.CategoryName);
+                }
+
+
+            }
+            else
+            {
+                Console.WriteLine(result.Message);
             }
 
 
@@ -37,6 +50,16 @@ namespace ConsoleUI
 
 
 
+
+        }
+
+        private static void DTOsTest()
+        {
+            ProductManager productManager = new ProductManager(new EfProductDal());
+            foreach (var product in productManager.GetProductDetail().Data)
+            {
+                Console.WriteLine(product.ProductName + " / " + product.CategoryName);
+            }
         }
 
         private static void CategoryTest()
@@ -53,7 +76,7 @@ namespace ConsoleUI
             //InMemory
 
             ProductManager productManager = new ProductManager(new InMemoryProductDal());
-            foreach (var product in productManager.GetAll())
+            foreach (var product in productManager.GetAll().Data)
             {
                 Console.WriteLine(product.ProductName);
             }
@@ -64,7 +87,7 @@ namespace ConsoleUI
             // EntityFramework
 
             ProductManager productManager = new ProductManager(new EfProductDal());
-            foreach (var product in productManager.GetAll())
+            foreach (var product in productManager.GetAll().Data)
             {
                 Console.WriteLine(product.ProductName);
             }
@@ -73,7 +96,7 @@ namespace ConsoleUI
         private static void ProductTest2()
         {
             ProductManager productManager = new ProductManager(new EfProductDal());
-            foreach (var product in productManager.GetAllByCategoryId(2))
+            foreach (var product in productManager.GetAllByCategoryId(2).Data)
             {
                 Console.WriteLine(product.ProductName);
             }
@@ -82,7 +105,7 @@ namespace ConsoleUI
         private static void ProductTest()
         {
             ProductManager productManager = new ProductManager(new EfProductDal());
-            foreach (var product in productManager.GetByUnitPrice(40, 100))
+            foreach (var product in productManager.GetByUnitPrice(40, 100).Data)
             {
                 Console.WriteLine(product.ProductName);
             }
