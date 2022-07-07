@@ -37,9 +37,15 @@ namespace Business.Concrete
 
         }
 
+        public IResult Delete(Product product)
+        {
+            _productDal.Delete(product);
+            return new SuccessResult(Messages.ProductDeleted);
+        }
+
         public IDataResult<List<Product>> GetAll()
         {
-            if (DateTime.Now.Hour==22)
+            if (DateTime.Now.Hour==23)
             {
                 return new ErrorDataResult<List<Product>>(Messages.MaintenanceTime);
             }
