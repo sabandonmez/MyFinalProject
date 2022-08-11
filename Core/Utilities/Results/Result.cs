@@ -10,16 +10,16 @@ namespace Core.Utilities.Results
     {
  
 
-        public Result(bool succes, string message):this(succes)
+        public Result(bool success, string message):this(success)
         {
             Message = message;
         }
-        public Result(bool succes)
+        public Result(bool success)
         {
-            Succes = succes;
+            Success = success;
         }
 
-        public bool Succes { get; }
+        public bool Success { get; }
 
         public string Message { get; }
     }
